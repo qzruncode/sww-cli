@@ -1,0 +1,60 @@
+{
+  "name": "sww-cli",
+  "version": "1.0.1",
+  "description": "cli for cacheweb-webpack-plugin",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/qzruncode/sww-cli.git"
+  },
+  "license": "MIT",
+  "keywords": [
+    "webpack",
+    "cli"
+  ],
+  "bin": {
+    "sww": "./bin/cli.js"
+  },
+  "author": "叶家伟",
+  "dependencies": {
+    "@babel/core": "^7.15.8",
+    "@babel/plugin-proposal-decorators": "^7.12.1",
+    "@babel/preset-env": "^7.15.8",
+    "@babel/preset-react": "^7.14.5",
+    "@babel/preset-typescript": "^7.12.1",
+    "@svgr/webpack": "^5.5.0",
+    "babel-eslint": "^10.1.0",
+    "babel-loader": "^8.2.2",
+    "babel-preset-react-app": "^10.0.0",
+    "buffer": "^6.0.3",
+    "chalk": "^4.1.2",
+    "clean-webpack-plugin": "^4.0.0",
+    "commander": "^8.2.0",
+    "copy-webpack-plugin": "^9.0.1",
+    "css-loader": "^6.4.0",
+    "dotenv": "^10.0.0",
+    "dotenv-webpack": "^7.0.3",
+    "eslint-webpack-plugin": "^3.0.1",
+    "fork-ts-checker-webpack-plugin": "^6.3.4",
+    "html-webpack-plugin": "^5.3.2",
+    "interpolate-html-plugin": "^4.0.0",
+    "less": "^4.1.2",
+    "less-loader": "^10.1.0",
+    "mini-css-extract-plugin": "^2.4.2",
+    "path-browserify": "^1.0.1",
+    "postcss": "^8.3.9",
+    "postcss-import": "^14.0.2",
+    "postcss-loader": "^6.1.1",
+    "postcss-preset-env": "^6.7.0",
+    "postcss-pxtorem": "^6.0.0",
+    "style-loader": "^3.3.0",
+    "thread-loader": "^3.0.4",
+    "typescript": "^4.4.4",
+    "util": "^0.12.4",
+    "webpack": "^5.58.2",
+    "webpack-dev-server": "^3.11.2",
+    "webpackbar": "^5.0.0-3"
+  },
+  "peerDependencies": {
+    "core-js": "^3.20.2"
+  }
+}
