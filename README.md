@@ -1,3 +1,6 @@
+[![NPM version](https://img.shields.io/npm/v/sww-cli.svg)](https://www.npmjs.com/package/sww-cli)
+[![NPM package](https://img.shields.io/npm/dy/sww-cli.svg)](https://www.npmjs.com/package/sww-cli)
+
 1. 命令
 
 ```
@@ -11,9 +14,19 @@ sww run --help 查看run命令的参数
   -h 设置开发环境的HOST
 ```
 
-sww-cli的运行命令
+2. sww-cli的运行命令
 
 ```
 开发：sww run -m Dev -h [yourhost] -H -url /
 编译：sww run -m Pro -url /
+```
+
+3. 使用注意
+
+```
+安装此插件的项目需要配置如下配置文件
+  browserslist
+  .env
+  .eslintrc.js
+  tsconfig.json
 ```
