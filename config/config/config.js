@@ -1,7 +1,7 @@
 const Helper = require('./combine/helper');
 const { output, resolve, optimization, plugins, loaders } = require('./combine');
 
-const buildConfig = () => {
+const buildConfig = (plugin = []) => {
   const isDev = process.env.mode === 'Dev' ? true : false;
   const commonConfig = {
     target: 'web',
@@ -10,7 +10,7 @@ const buildConfig = () => {
     output,
     resolve,
     optimization,
-    plugins,
+    plugins: plugins.concat(plugin),
     module: { rules: loaders },
   };
   const devConfig = {

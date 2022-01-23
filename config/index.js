@@ -1,8 +1,8 @@
-const webpack = require('webpack');
-const buildConfig = require('./config/config');
+const webpack = require("webpack");
+const buildConfig = require("./config/config");
 
-const config = () => {
-  webpack(buildConfig(), (err, stats) => {
+const config = (plugin = []) => {
+  webpack(buildConfig(plugin), (err, stats) => {
     if (err) {
       console.error(err.stack || err);
       if (err.details) {
@@ -10,7 +10,7 @@ const config = () => {
       }
       return;
     }
-  
+
     const info = stats.toJson();
 
     if (stats.hasErrors()) {

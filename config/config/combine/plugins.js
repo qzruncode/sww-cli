@@ -42,6 +42,9 @@ const checkConfig = isRuntimeCheck ? [
 
 const plugins = [
   new WebpackBar(),
+  new CopyPlugin({
+    patterns: [{ from: resolveApp('static'), to: resolveApp('build') }],
+  }),
   new HtmlWebpackPlugin({ template: './public/index.html' }),
   new InterpolateHtmlPlugin({
     PUBLIC_URL: publicUrl.slice(0, -1),
@@ -51,12 +54,5 @@ const plugins = [
   ...devConfig,
   ...checkConfig,
 ]
-
-// 检查static是否存在
-fs.access('static', fs.constants.F_OK, (err) => {
-  !err && plugins.push(new CopyPlugin({
-    patterns: [{ from: 'static', to: 'staic' }],
-  }))
-})
 
 exports.plugins = plugins;
