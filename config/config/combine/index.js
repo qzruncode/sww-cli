@@ -24,13 +24,13 @@ exports.resolve = {
     '@': Helper.resolveApp('src'),
     ...aliasConfig,
   },
-  fallback: {
-    buffer: require.resolve('buffer/'),
-    path: require.resolve('path-browserify'),
-    util: require.resolve('util/'),
-    url: require.resolve("url/"),
-    events: require.resolve("events/")
-  },
+  // fallback: {
+  //   buffer: require.resolve('buffer/'),
+  //   path: require.resolve('path-browserify'),
+  //   util: require.resolve('util/'),
+  //   url: require.resolve("url/"),
+  //   events: require.resolve("events/")
+  // },
 };
 
 exports.optimization = {

@@ -12,6 +12,7 @@ const publicUrl = process.env.PUBLIC_URL;
 
 const configServer = PORT => {
   const options = {
+    port: PORT,
     quiet: true,
     clientLogLevel: 'warn',
     https: isHTTPS,
@@ -31,11 +32,9 @@ const configServer = PORT => {
     },
     proxy,
   };
-  webpackDevServer.addDevServerEntrypoints(config, options);
-  const server = new webpackDevServer(compiler, options);
-  server.listen(PORT, function () {
-    console.log(`project listening on port ${PORT}!\n`);
-  });
+  const server = new webpackDevServer(options, compiler);
+  server.start();
+  console.log(`project listening on port ${PORT}!\n`);
 };
 
 Helper.checkPortIsValid(configServer);
