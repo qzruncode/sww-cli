@@ -1,7 +1,14 @@
 [![NPM version](https://img.shields.io/npm/v/sww-cli.svg)](https://www.npmjs.com/package/sww-cli)
 [![NPM package](https://img.shields.io/npm/dy/sww-cli.svg)](https://www.npmjs.com/package/sww-cli)
 
-1. 命令
+## sww-cli
+
+1. 基于webpack开发的前端脚手架cli工具，不需要配置webpack，下载此插件安装即可。
+2. 支持react、typescript、less等
+3. 能够将前端的文件打包成合适的大小，避免文件臃肿。
+4. 此插件是本人在开发[cacheweb-webpack-plugin](https://www.npmjs.com/package/cacheweb-webpack-plugin)时配套开发的脚手架工具。
+
+## 支持的命令
 
 ```
 sww --help
@@ -14,18 +21,38 @@ sww run --help 查看run命令的参数
   -h 设置开发环境的HOST
 ```
 
-2. sww-cli的运行命令
+## sww-cli的使用
 
-```
-开发：sww run -m Dev -h [yourhost] -H -url /
-编译：sww run -m Pro -url /
+```js
+"scripts": {
+  "start": "sww run -m Dev -h cache.service-worker.com -H -url /",
+  "build": "sww run -m Pro -url /",
+}
 ```
 
-3. 使用注意
+## 插件
+
+```js
+// 在项目根目录新建webpack.plugins.js，在文件中写入
+
+const cachewebWebpackPlugin = require('cacheweb-webpack-plugin');
+module.exports = [
+  new cachewebWebpackPlugin({
+    chacheName: 'SW',
+    expirationHour: 72,
+    maxNum: 0,
+    noCacheFileList: ['index.html', 'register.js'],
+    cacheFirstList: ['cacheFirstTest', 'acacheFirstTes', 'bcacheFirstTes'],
+    permanentCacheList: ['test'],
+  }),
+];
+```
+
+## 使用注意
 
 ```
 安装此插件的项目需要配置如下配置文件
-  browserslist
+  .browserslistrc
   .env
   .eslintrc.js
   tsconfig.json
