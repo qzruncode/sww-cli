@@ -13,22 +13,27 @@ const publicUrl = process.env.PUBLIC_URL;
 const configServer = PORT => {
   const options = {
     port: PORT,
-    quiet: true,
-    clientLogLevel: 'warn',
     https: isHTTPS,
-    progress: true,
-    writeToDisk: false,
     compress: true,
     open: true,
     hot: true,
     host: process.env.HOST,
     allowedHosts: [process.env.HOST],
-    contentBase: Helper.resolveApp('static'), // 服务静态文件
-    contentBasePublicPath: publicUrl, // 静态服务前缀
-    publicPath: publicUrl,
     historyApiFallback: {
       disableDotRule: true,
       index: publicUrl,
+    },
+    devMiddleware: {
+      publicPath: publicUrl,
+      writeToDisk: false,
+    },
+    client: {
+      logging: "info",
+      progress: true,
+    },
+    static: {
+      directory: Helper.resolveApp('static'), // 服务静态文件
+      publicPath: publicUrl, // 静态服务前缀
     },
     proxy,
   };
