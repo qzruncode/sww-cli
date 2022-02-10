@@ -3,6 +3,13 @@
 const program = require("commander");
 const chalk = require("chalk");
 const fs = require("fs");
+const fetch = require("node-fetch");
+const path = require("path");
+const { createWriteStream } = require("node:fs");
+const zlib = require("zlib");
+const tar = require("tar");
+const mkdirp = require("mkdirp");
+const ora = require("ora");
 const { resolveApp } = require("../config/config/combine/helper");
 
 program.on("--help", () => {
@@ -45,5 +52,58 @@ program
       });
     }
   });
+
+program.command("init").action(async () => {
+  const templateName = program.args[1];
+  const spinner = ora("正在下载sww-template").start();
+  const pkg = await fetch("https://registry.npmjs.org/" + templateName);
+  const pkgInfo = await pkg.json();
+  if (pkgInfo.error) {
+    console.log(chalk.red(pkgInfo.error));
+  } else {
+    const version = pkgInfo["dist-tags"].latest;
+    const tarball = pkgInfo.versions[version].dist.tarball;
+    const destDir = path.join(process.cwd());
+    const pkgTgz = await fetch(tarball);
+    const dirs = [];
+    const files = [];
+    const wss = [];
+    pkgTgz.body
+      .pipe(zlib.Unzip())
+      .pipe(new tar.Parse())
+      .on("entry", function (entry) {
+        if (entry.type === "Directory") {
+          entry.resume();
+          return;
+        }
+        const realPath = entry.path.replace(/^package\//, "");
+        let filename = path.basename(realPath);
+        filename =
+          filename === "_package.json"
+            ? filename.replace(/^_/, "")
+            : filename.replace(/^_/, ".");
+        const destPath = path.join(destDir, path.dirname(realPath), filename);
+        const dir = path.dirname(destPath);
+        if (!dirs.includes(dir)) {
+          dirs.push(dir);
+          mkdirp.sync(dir);
+        }
+        files.push(destPath);
+        wss.push(
+          new Promise((resolve) => {
+            entry
+              .pipe(createWriteStream(destPath))
+              .on("finish", () => resolve())
+              .on("close", () => resolve());
+          })
+        );
+      })
+      .on("end", () => {
+        Promise.all(wss).then(() => {
+          spinner.succeed("sww-template下载完成");
+        });
+      });
+  }
+});
 
 program.parse(process.argv);

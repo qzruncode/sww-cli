@@ -1,4 +1,3 @@
-const fs = require('fs');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const InterpolateHtmlPlugin = require('interpolate-html-plugin');
@@ -48,6 +47,7 @@ const plugins = [
   new HtmlWebpackPlugin({ template: './public/index.html' }),
   new InterpolateHtmlPlugin({
     PUBLIC_URL: publicUrl.slice(0, -1),
+    Dev: process.env.mode === 'Dev',
   }),
   new CleanWebpackPlugin(),
   new Dotenv(),

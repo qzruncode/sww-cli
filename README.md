@@ -7,6 +7,7 @@
 2. 支持react、typescript、less等
 3. 能够将前端的文件打包成合适的大小，避免文件臃肿。
 4. 此插件是本人在开发[cacheweb-webpack-plugin](https://www.npmjs.com/package/cacheweb-webpack-plugin)时配套开发的脚手架工具。
+5. 支持使用模板，配套模板[sww-template](https://www.npmjs.com/package/sww-template)提供开箱即用的配置环境，内置[cacheweb-webpack-plugin](https://www.npmjs.com/package/cacheweb-webpack-plugin)，集成开发所需的各种配置
 
 ## 支持的命令
 
@@ -19,6 +20,8 @@ sww run --help 查看run命令的参数
   -r 开启px转换成rem
   -H 开启HTTPS
   -h 设置开发环境的HOST
+
+sww init sww-template 初始化模板
 ```
 
 ## sww-cli的使用
@@ -28,6 +31,17 @@ sww run --help 查看run命令的参数
   "start": "sww run -m Dev -h cache.service-worker.com -H -url /",
   "build": "sww run -m Pro -url /",
 }
+```
+
+## 模板的安装
+
+```
+git init
+npm install sww-cli
+npx sww-cli init sww-template
+npm install
+npm start 开发
+npm build 生产
 ```
 
 ## 插件
